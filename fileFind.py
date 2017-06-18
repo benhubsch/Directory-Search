@@ -14,25 +14,67 @@ from userinfo import paths
 def cli(dst, result, duplicated):
     dst = (' ').join(dst)
     if duplicated:
-        arr = getAllPaths(dst)
+        arr = list(getAllPaths(dst))
+        if len(arr) > 1:
+            click.echo(str(len(arr)) + ' paths found that match your input.\n')
+            for dex in range(len(arr)):
+                click.echo(str(dex + 1) + ': ' + str(arr[dex]))
+            click.echo()
+            value = click.prompt('Enter a path number to proceed: ', type=int)
+            path = arr[value - 1]
+        else:
+            path = arr[0]
     else:
         path = getOnePath(dst)
+        
+    click.echo(path)
 
+
+def formatter(path):
+    final = ''
+    for i in range(len(path) - 1):
+        if path[i + 1] == ' ' and path[i] != '\\':
+            final += path[i] + '\\'
+        else:
+            final += path[i]
+    return final + path[-1]
+
+def getFilePath(fname, path, all=False):
+    found = set([])
+    for root, dirs, files in os.walk(path):
+        if fname in files:
+            if all:
+                found.add(os.path.join(root, fname))
+            else:
+                # print(os.path.join(root, fname))
+                return os.path.join(root, fname)
+    return list(found)
+
+def getDirPath(dname, path):
+    found = set([])
+    for root, dirs, files in os.walk(path):
+        if dname in dirs:
+            if all:
+                found.add(os.path.join(root, dname))
+            else:
+                return os.path.join(root, dname)
+    return list(found)
 
 def getAllPaths(dst):
-    found = []
+    topFound = set([])
     for startDirectory in paths:   # notion of already having visited a directory and not re-searching it
         if dst.find('.') >= 0:
-            path = getFilePath(dst, startDirectory)
+            pathArr = getFilePath(dst, startDirectory, True)
         else:
-            path = getDirPath(dst, startDirectory)
+            pathArr = getDirPath(dst, startDirectory)
 
-        if path != None:
-            found.append(formatter(path))
+        if pathArr != []:
+            for path in pathArr:
+                topFound.add(formatter(path))
 
-    if found == []:
+    if topFound == set([]):
         raise PathError('Path to file/directory not found.')
-    return found
+    return topFound
 
 def getOnePath(dst):
     for startDirectory in paths:
@@ -46,40 +88,7 @@ def getOnePath(dst):
 
     raise PathError('Path to file/directory not found.')
 
-def formatter(path):
-    final = ''
-    for i in range(len(path) - 1):
-        if path[i + 1] == ' ' and path[i] != '\\':
-            final += path[i] + '\\'
-        else:
-            final += path[i]
-    return final + path[-1]
 
-def getFilePath(fname, path):
-    for root, dirs, files in os.walk(path):
-        if fname in files:
-            return os.path.join(root, fname)
-
-def getDirPath(dname, path):
-    for root, dirs, files in os.walk(path):
-        if dname in dirs:
-            return os.path.join(root, dname)
-
-
-# def find_all_files(name, path):
-#     result = []
-#     for root, dirs, files in os.walk(path):
-#         if name in files:
-#             result.append(os.path.join(root, name))
-#     return result
-#
-# def find_directory(name, path):
-#     for root, dirs, files in os.walk(path):
-#         if name in dirs:
-#             return os.path.join(root, name)
-#
-# def formatter(path):
-#     return ('\ ').join(path.split(' '))
 #
 # os.chdir(find_directory('Practice Problems', '/Users/benhubsch'))
 # os.system('/bin/bash')
