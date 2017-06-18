@@ -2,42 +2,58 @@ import os
 import subprocess
 import click
 from errors import PathError
-from userinfo import paths
+from userinfo import paths, editor
 
 # prompt strings if options not given?
 @click.command()
-@click.option('-o', '--open-editor', 'result', flag_value='open-editor', help='Opens the file or directory in a text editor.')
+@click.option('-o', '--open-editor', 'result', flag_value='open-editor', help='Opens the file or directory in a text editor. This is the default value when no other flag is provided.')
 @click.option('-c', '--change-directory', 'result', flag_value='change-directory', help='Changes the current working directory. A smarter version of cd <PATH>')
 @click.option('-f', '--open-finder', 'result', flag_value='open-finder', help='Opens a new Finder window to the specified directory. If a filename is given, the parent directory of that file is opened.')
 @click.option('-d', '--duplicated', is_flag=True, help='To be used when the filename or directory name on your machine is non-unique.')
 @click.argument('dst', type=click.Path(), nargs=-1, required=True) # nargs=-1 means that all arguments will be passed as a tuple, no matter how many arguments there are
 def cli(dst, result, duplicated):
+    print(type(duplicated))
     dst = (' ').join(dst)
     if duplicated:
         arr = list(getAllPaths(dst))
         if len(arr) > 1:
-            click.echo(str(len(arr)) + ' paths found that match your input.\n')
-            for dex in range(len(arr)):
-                click.echo(str(dex + 1) + ': ' + str(arr[dex]))
-            click.echo()
-            value = click.prompt('Enter a path number to proceed: ', type=int)
-            path = arr[value - 1]
+            chosen = duplicateChoicePrompts(arr)
+            path = arr[chosen - 1]
         else:
             path = arr[0]
     else:
         path = getOnePath(dst)
-        
-    click.echo(path)
 
+    dealWithResult(path, result)
 
-def formatter(path):
-    final = ''
-    for i in range(len(path) - 1):
-        if path[i + 1] == ' ' and path[i] != '\\':
-            final += path[i] + '\\'
-        else:
-            final += path[i]
-    return final + path[-1]
+def duplicateChoicePrompts(arr):
+    click.echo(str(len(arr)) + ' paths found that match your input.\n')
+    for dex in range(len(arr)):
+        click.echo(str(dex + 1) + ': ' + str(arr[dex]))
+    click.echo()
+    value = -1
+    while value not in range(1, len(arr) + 1):
+        value = click.prompt('Enter a path number to proceed: ', type=int)
+        if value not in range(1, len(arr) + 1):
+            click.echo('Error: ' + str(value) + ' is not a valid entry')
+    return value
+
+def dealWithResult(path, result):
+    if result == 'open-finder':
+        if path.split('/')[-1].find('.') > 1:
+            click.echo('You input a file. The parent directory has been chosen instead.')
+            path = str(('/').join(path.split('/')[:-1]))
+        click.echo('Opening the finder now...')
+        path = subproccesFormat(path)
+        subprocess.Popen(['open', path])
+    elif result == 'change-directory':
+        click.echo('Changing the current working directory now...')
+        click.echo('cd ' + path + '; /bin/bash')
+        os.system('cd ' + path + '; /bin/bash')
+    else:
+        print(path)
+        click.echo('Opening the text editor now...')
+        os.system(editor + ' ' + path)
 
 def getFilePath(fname, path, all=False):
     found = set([])
@@ -46,7 +62,6 @@ def getFilePath(fname, path, all=False):
             if all:
                 found.add(os.path.join(root, fname))
             else:
-                # print(os.path.join(root, fname))
                 return os.path.join(root, fname)
     return list(found)
 
@@ -84,24 +99,27 @@ def getOnePath(dst):
             path = getDirPath(dst, startDirectory)
 
         if path != None:
-            return formatter(path)
+            return formatter(path[0])
 
     raise PathError('Path to file/directory not found.')
 
+def subproccesFormat(path):
+    ans = ''
+    for ch in path:
+        if ch == '\\':
+            continue
+        ans += ch
+    return ans
 
-#
-# os.chdir(find_directory('Practice Problems', '/Users/benhubsch'))
-# os.system('/bin/bash')
+def formatter(path):
+    final = ''
+    for i in range(len(path) - 1):
+        if path[i + 1] == ' ' and path[i] != '\\':
+            final += path[i] + '\\'
+        else:
+            final += path[i]
+    return final + path[-1]
 
-# for file_instance in find_all_files('redditBot.py', '/Users/benhubsch/'):
-#     os.system('atom ' + formatter(file_instance))
-# os.system('atom ' + formatter(find_first_file('redditBot.py', '/Users/benhubsch/')))
 
-# print(sys.argv)
-# print(sys.argv[1])
-
-# os.chdir(dropbox)
-# os.system("pwd")
-# os.system("/bin/bash")
-# subprocess.Popen(['open','/Users/benhubsch/Dropbox/'])
-
+if __name__ == '__main__':
+    cli()
