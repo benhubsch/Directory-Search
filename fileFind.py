@@ -1,12 +1,8 @@
 import os
 import subprocess
 import click
-
-dropbox = '/Users/benhubsch/Dropbox/'
-docs = '/Users/benhubsch/Documents/'
-downloads = '/Users/benhubsch/Downloads/'
-desktop = '/Users/benhubsch/Dropbox/'
-general = '/Users/benhubsch/'
+from errors import PathError
+from userinfo import paths
 
 # prompt strings if options not given?
 @click.command()
@@ -16,25 +12,34 @@ general = '/Users/benhubsch/'
 @click.option('-d', '--duplicated', is_flag=True, help='To be used when the filename or directory name on your machine is non-unique.')
 @click.argument('dst', type=click.Path(), nargs=-1, required=True) # nargs=-1 means that all arguments will be passed as a tuple, no matter how many arguments there are
 def cli(dst, result, duplicated):
-    print(result)
-    print(duplicated)
-    # if name.find('.') >= 0:
-    #     path = getFilePath(dst, src)
-    # else:
-    #     path = getFilePath(dst, src)
-    # return path
+    dst = (' ').join(dst)
+    if dst.find('.') >= 0:
+        path = getFilePath(dst, paths[0])
+    else:
+        path = getDirPath(dst, paths[0])
+    if path == None:
+        raise PathError('Path to file/directory not found.')
+    path = formatter(path)
+    click.echo(path)
 
+def formatter(path):
+    final = ''
+    for i in range(len(path) - 1):
+        if path[i + 1] == ' ' and path[i] != '\\':
+            final += path[i] + '\\'
+        else:
+            final += path[i]
+    return final + path[-1]
 
 def getFilePath(fname, path):
     for root, dirs, files in os.walk(path):
-        if fname in dirs:
+        if fname in files:
             return os.path.join(root, fname)
 
 def getDirPath(dname, path):
     for root, dirs, files in os.walk(path):
-        if fname in files:
-            console.log(os.path.join(root, fname))
-            return os.path.join(root, fname)
+        if dname in dirs:
+            return os.path.join(root, dname)
 
 
 # def find_all_files(name, path):
