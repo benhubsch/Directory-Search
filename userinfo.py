@@ -8,4 +8,4 @@ paths = [dropbox, docs, downloads, desktop, general]
 
 
 # preferred text editor
-atom = 'atom'
+editor = 'atom'

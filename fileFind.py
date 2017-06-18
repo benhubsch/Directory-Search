@@ -13,14 +13,38 @@ from userinfo import paths
 @click.argument('dst', type=click.Path(), nargs=-1, required=True) # nargs=-1 means that all arguments will be passed as a tuple, no matter how many arguments there are
 def cli(dst, result, duplicated):
     dst = (' ').join(dst)
-    if dst.find('.') >= 0:
-        path = getFilePath(dst, paths[0])
+    if duplicated:
+        arr = getAllPaths(dst)
     else:
-        path = getDirPath(dst, paths[0])
-    if path == None:
+        path = getOnePath(dst)
+
+
+def getAllPaths(dst):
+    found = []
+    for startDirectory in paths:   # notion of already having visited a directory and not re-searching it
+        if dst.find('.') >= 0:
+            path = getFilePath(dst, startDirectory)
+        else:
+            path = getDirPath(dst, startDirectory)
+
+        if path != None:
+            found.append(formatter(path))
+
+    if found == []:
         raise PathError('Path to file/directory not found.')
-    path = formatter(path)
-    click.echo(path)
+    return found
+
+def getOnePath(dst):
+    for startDirectory in paths:
+        if dst.find('.') >= 0:
+            path = getFilePath(dst, startDirectory)
+        else:
+            path = getDirPath(dst, startDirectory)
+
+        if path != None:
+            return formatter(path)
+
+    raise PathError('Path to file/directory not found.')
 
 def formatter(path):
     final = ''
