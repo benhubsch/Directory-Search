@@ -1,8 +1,0 @@
-fileFind.py
-setup.py
-File_Finder.egg-info/PKG-INFO
-File_Finder.egg-info/SOURCES.txt
-File_Finder.egg-info/dependency_links.txt
-File_Finder.egg-info/entry_points.txt
-File_Finder.egg-info/requires.txt
-File_Finder.egg-info/top_level.txt
