@@ -1,2 +1,0 @@
-class PathError(Exception):
-    pass

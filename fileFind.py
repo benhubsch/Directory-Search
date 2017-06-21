@@ -1,18 +1,19 @@
 import os
 import subprocess
 import click
-from errors import PathError
 from userinfo import paths, editor
+
+class PathError(Exception):
+    pass
 
 # prompt strings if options not given?
 @click.command()
-@click.option('-o', '--open-editor', 'result', flag_value='open-editor', help='Opens the file or directory in a text editor. This is the default value when no other flag is provided.')
-@click.option('-c', '--change-directory', 'result', flag_value='change-directory', help='Changes the current working directory. A smarter version of cd <PATH>')
+@click.option('-c', '--change-directory', 'result', flag_value='change-directory', help='Changes the current working directory. A smarter version of cd <PATH>.  This flag is the default when no other flag is provided.')
+@click.option('-e', '--open-editor', 'result', flag_value='open-editor', help='Opens the file or directory in a text editor.')
 @click.option('-f', '--open-finder', 'result', flag_value='open-finder', help='Opens a new Finder window to the specified directory. If a filename is given, the parent directory of that file is opened.')
 @click.option('-d', '--duplicated', is_flag=True, help='To be used when the filename or directory name on your machine is non-unique.')
 @click.argument('dst', type=click.Path(), nargs=-1, required=True) # nargs=-1 means that all arguments will be passed as a tuple, no matter how many arguments there are
 def cli(dst, result, duplicated):
-    print(type(duplicated))
     dst = (' ').join(dst)
     if duplicated:
         arr = list(getAllPaths(dst))
@@ -46,14 +47,13 @@ def dealWithResult(path, result):
         click.echo('Opening the finder now...')
         path = subproccesFormat(path)
         subprocess.Popen(['open', path])
-    elif result == 'change-directory':
+    elif result == 'open-editor':
+        click.echo('Opening the text editor now...')
+        os.system(editor + ' ' + path)
+    else:
         click.echo('Changing the current working directory now...')
         click.echo('cd ' + path + '; /bin/bash')
         os.system('cd ' + path + '; /bin/bash')
-    else:
-        print(path)
-        click.echo('Opening the text editor now...')
-        os.system(editor + ' ' + path)
 
 def getFilePath(fname, path, all=False):
     found = set([])
@@ -98,8 +98,11 @@ def getOnePath(dst):
         else:
             path = getDirPath(dst, startDirectory)
 
-        if path != None:
-            return formatter(path[0])
+        if path != None and len(path) > 0:
+            if type(path) == type([]):
+                return formatter(path[0])
+            else:
+                return formatter(path)
 
     raise PathError('Path to file/directory not found.')
 
@@ -121,5 +124,5 @@ def formatter(path):
     return final + path[-1]
 
 
-if __name__ == '__main__':
-    cli()
+# if __name__ == '__main__':
+#     cli()

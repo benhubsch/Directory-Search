@@ -4,7 +4,8 @@ docs = '/Users/benhubsch/Documents/'
 downloads = '/Users/benhubsch/Downloads/'
 desktop = '/Users/benhubsch/Desktop/'
 general = '/Users/benhubsch/'
-paths = [dropbox, docs, downloads, desktop]
+icloud = '/Users/benhubsch/Library/Mobile Documents/'
+paths = [dropbox, docs, downloads, desktop, icloud]
 
 
 # preferred text editor

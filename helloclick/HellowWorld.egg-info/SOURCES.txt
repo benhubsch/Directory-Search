@@ -1,7 +1,0 @@
-hello.py
-HellowWorld.egg-info/PKG-INFO
-HellowWorld.egg-info/SOURCES.txt
-HellowWorld.egg-info/dependency_links.txt
-HellowWorld.egg-info/entry_points.txt
-HellowWorld.egg-info/requires.txt
-HellowWorld.egg-info/top_level.txt
