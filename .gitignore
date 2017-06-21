@@ -101,3 +101,5 @@ ENV/
 
 helloclick
 build
+venvpy27
+venvpy36
