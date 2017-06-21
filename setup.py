@@ -25,8 +25,6 @@ class InstallCommand(distutils.cmd.Command):
                 self.file_paths.append(currentPath)
 
     def run(self):
-        yellow='\033[1;33m'
-        no_color='\033[0m'
         home = expanduser("~")
         dbox = click.prompt('Do you use Dropbox? (y/n)')
         while dbox != 'y' and dbox != 'n':
@@ -115,10 +113,10 @@ class BuildCommand(setuptools.command.build_py.build_py):
 
 if __name__ == '__main__':
     setup(
-        cmdclass={
-            'install': InstallCommand,
-            'build_py': BuildCommand,
-        },
+        # cmdclass={
+        #     'install': InstallCommand,
+        #     'build_py': BuildCommand,
+        # },
         name='File Finder',
         version='1.0',
         py_modules=['fileFind'],
@@ -134,6 +132,3 @@ if __name__ == '__main__':
         '''
     )
 
-    paths = getDefaultPaths()
-    paths.extend(getPreferredPaths(defaults))
-    editor = getEditor()

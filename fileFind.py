@@ -51,8 +51,10 @@ def dealWithResult(path, result):
         click.echo('Opening the text editor now...')
         os.system(editor + ' ' + path)
     else:
+        if path.split('/')[-1].find('.') > 1:
+            click.echo('You input a file. The parent directory has been chosen instead.')
+            path = str(('/').join(path.split('/')[:-1]))
         click.echo('Changing the current working directory now...')
-        click.echo('cd ' + path + '; /bin/bash')
         os.system('cd ' + path + '; /bin/bash')
 
 def getFilePath(fname, path, all=False):
