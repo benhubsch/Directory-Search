@@ -34,7 +34,7 @@ def duplicateChoicePrompts(arr):
     click.echo()
     value = -1
     while value not in range(1, len(arr) + 1):
-        value = click.prompt('Enter a path number to proceed: ', type=int)
+        value = click.prompt('Enter a path number to proceed ', type=int)
         if value not in range(1, len(arr) + 1):
             click.echo('Error: ' + str(value) + ' is not a valid entry')
     return value
