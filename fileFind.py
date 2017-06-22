@@ -2,11 +2,14 @@ import os
 import subprocess
 import click
 from userinfo import paths, editor
+from os.path import expanduser
 
 class PathError(Exception):
     pass
 
-# prompt strings if options not given?
+# making it case insensitive, autocomplete possible (remembering old values)?,
+# adding an option to search if path not found on a try/catch
+
 @click.command()
 @click.option('-c', '--change-directory', 'result', flag_value='change-directory', help='Changes the current working directory. A smarter version of cd <PATH>.  This flag is the default when no other flag is provided.')
 @click.option('-e', '--open-editor', 'result', flag_value='open-editor', help='Opens the file or directory in a text editor.')
@@ -15,15 +18,40 @@ class PathError(Exception):
 @click.argument('dst', type=click.Path(), nargs=-1, required=True) # nargs=-1 means that all arguments will be passed as a tuple, no matter how many arguments there are
 def cli(dst, result, duplicated):
     dst = (' ').join(dst)
-    if duplicated:
-        arr = list(getAllPaths(dst))
-        if len(arr) > 1:
-            chosen = duplicateChoicePrompts(arr)
-            path = arr[chosen - 1]
+    try:
+        if duplicated:
+            arr = list(getAllPaths(dst, paths))
+            if len(arr) > 1:
+                chosen = duplicateChoicePrompts(arr)
+                path = arr[chosen - 1]
+            else:
+                path = arr[0]
         else:
-            path = arr[0]
-    else:
-        path = getOnePath(dst)
+            path = getOnePath(dst, paths)
+    except Exception as e:
+        click.echo('The file or directory you requested was not located in any of your default, built-in filepaths.')
+        whole = click.prompt('Would you like to search everything in your file tree starting from your home directory? This could take a little while depending on the size of your file tree. (y/n)')
+        while whole != 'y' and whole != 'n':
+            click.echo('\'y\' or \'n\' are the only valid responses')
+            whole = click.prompt('Would you like to search everything in your file tree starting from your home directory? (y/n)')
+        try:
+            if whole == 'y':
+                home = expanduser("~")
+                if duplicated:
+                    arr = list(getAllPaths(dst, [home]))
+                    if len(arr) > 1:
+                        chosen = duplicateChoicePrompts(arr)
+                        path = arr[chosen - 1]
+                    else:
+                        path = arr[0]
+                else:
+                    path = getOnePath(dst, [home])
+            else:
+                click.secho('File not found.', fg='red', bold=True)
+                return
+        except Exception as e:
+            click.secho('File not found.', fg='red', bold=True)
+            return
 
     dealWithResult(path, result)
 
@@ -77,7 +105,7 @@ def getDirPath(dname, path):
                 return os.path.join(root, dname)
     return list(found)
 
-def getAllPaths(dst):
+def getAllPaths(dst, paths):
     topFound = set([])
     for startDirectory in paths:   # notion of already having visited a directory and not re-searching it
         if dst.find('.') >= 0:
@@ -93,7 +121,7 @@ def getAllPaths(dst):
         raise PathError('Path to file/directory not found.')
     return topFound
 
-def getOnePath(dst):
+def getOnePath(dst, paths):
     for startDirectory in paths:
         if dst.find('.') >= 0:
             path = getFilePath(dst, startDirectory)

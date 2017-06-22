@@ -113,10 +113,10 @@ class BuildCommand(setuptools.command.build_py.build_py):
 
 if __name__ == '__main__':
     setup(
-        # cmdclass={
-        #     'install': InstallCommand,
-        #     'build_py': BuildCommand,
-        # },
+        cmdclass={
+            'install': InstallCommand,
+            'build_py': BuildCommand,
+        },
         name='File Finder',
         version='1.0',
         py_modules=['fileFind'],
