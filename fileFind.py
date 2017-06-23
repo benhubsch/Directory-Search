@@ -7,7 +7,7 @@ from os.path import expanduser
 class PathError(Exception):
     pass
 
-# making it case insensitive, autocomplete possible (remembering old values)?,
+# making it case insensitive, autocomplete possible (remembering old values, running and building a trie when terminal loads)?,
 # adding an option to search if path not found on a try/catch
 
 @click.command()
@@ -19,15 +19,7 @@ class PathError(Exception):
 def cli(dst, result, duplicated):
     dst = (' ').join(dst)
     try:
-        if duplicated:
-            arr = list(getAllPaths(dst, paths))
-            if len(arr) > 1:
-                chosen = duplicateChoicePrompts(arr)
-                path = arr[chosen - 1]
-            else:
-                path = arr[0]
-        else:
-            path = getOnePath(dst, paths)
+        path = callHandler(dst, duplicated, paths)
     except Exception as e:
         click.echo('The file or directory you requested was not located in any of your default, built-in filepaths.')
         whole = click.prompt('Would you like to search everything in your file tree starting from your home directory? This could take a little while depending on the size of your file tree. (y/n)')
@@ -37,23 +29,26 @@ def cli(dst, result, duplicated):
         try:
             if whole == 'y':
                 home = expanduser("~")
-                if duplicated:
-                    arr = list(getAllPaths(dst, [home]))
-                    if len(arr) > 1:
-                        chosen = duplicateChoicePrompts(arr)
-                        path = arr[chosen - 1]
-                    else:
-                        path = arr[0]
-                else:
-                    path = getOnePath(dst, [home])
+                path = callHandler(dst, duplicated, [home])
             else:
                 click.secho('File not found.', fg='red', bold=True)
                 return
         except Exception as e:
             click.secho('File not found.', fg='red', bold=True)
             return
-
     dealWithResult(path, result)
+
+def callHandler(dst, duplicated, start):
+    if duplicated:
+        arr = list(getAllPaths(dst, start))
+        if len(arr) > 1:
+            chosen = duplicateChoicePrompts(arr)
+            path = arr[chosen - 1]
+        else:
+            path = arr[0]
+    else:
+        path = getOnePath(dst, start)
+    return path
 
 def duplicateChoicePrompts(arr):
     click.echo(str(len(arr)) + ' paths found that match your input.\n')
@@ -97,6 +92,10 @@ def getFilePath(fname, path, all=False):
 
 def getDirPath(dname, path):
     found = set([])
+    home = expanduser("~")
+    print(paths, os.path.join(home, dname))
+    if os.path.join(home, dname) in paths:
+        found.add(os.path.join(home, dname))
     for root, dirs, files in os.walk(path):
         if dname in dirs:
             if all:
