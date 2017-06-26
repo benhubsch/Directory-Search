@@ -47,6 +47,7 @@ def callHandler(dst, duplicated, start):
         else:
             path = arr[0]
     else:
+        if dst == '.': return os.getcwd()
         path = getOnePath(dst, start)
     return path
 
@@ -93,7 +94,6 @@ def getFilePath(fname, path, all=False):
 def getDirPath(dname, path):
     found = set([])
     home = expanduser("~")
-    print(paths, os.path.join(home, dname))
     if os.path.join(home, dname) in paths:
         found.add(os.path.join(home, dname))
     for root, dirs, files in os.walk(path):
