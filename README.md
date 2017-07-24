@@ -1,6 +1,6 @@
 # File-Finder
-A command-line program that removes the hassle of finding and opening files and directories.
+This is a command-line program that removes the hassle of finding and opening files and directories.
 
-![Alt Text](https://github.com/benhubsch/File-Finder/raw/master/gifs/ff-f.gif)
+There is a setup file you can use to install this module. It does have one dependency of the <a src="https://github.com/pallets/click>Click library</a>, which you'll have to install to get started. Installation will prompt you for a series of configuration options that need Click to get started.
 
-<video src="https://github.com/benhubsch/File-Finder/raw/master/gifs/ff-f.mp4" poster="poster.jpg" width="320" height="200" controls preload></video>
+
