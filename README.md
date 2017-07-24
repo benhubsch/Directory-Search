@@ -19,16 +19,19 @@ $ python3 setup.py
 
 ## Usage
 
-Replace the contents of `README.md` with your project's:
+The structure of most all commands will be roughly as follows:
 
-- Name
-- Description
-- Installation instructions
-- Usage instructions
-- Support instructions
-- Contributing instructions
+```
+$ ff [file or directory name] [-flag]
+```
 
-Feel free to remove any sections that aren't applicable to your project.
+The file or directory name option should be self evident.
+
+You can also always type
+```
+$ ff --help
+```
+to remind yourself of the available commands if you ever forget.
 
 ## Support
 
