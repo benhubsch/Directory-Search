@@ -58,4 +58,4 @@ Please note that this is application is currently only funcitonal on OS X. [Open
 
 ## Contributing
 
-Please contribute using [Github Flow](https://guides.github.com/introduction/flow/). Create a branch, add commits, and [open a pull request](https://github.com/fraction/readme-boilerplate/compare/).
+Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
