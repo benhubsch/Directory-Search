@@ -1,4 +1,4 @@
 # File-Finder
 A command-line program that removes the hassle of finding and opening files and directories.
 
-![Alt Text](https://giphy.com/embed/xTkcEUrDNnfGtOt9u0)
+![Alt Text](https://github.com/benhubsch/File-Finder/raw/master/gifs/cd.gif)
