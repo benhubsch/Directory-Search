@@ -11,12 +11,10 @@ A command-line program that removes the hassle of finding and opening files and 
 
 ## Installation
 
-Download to your project directory, add `README.md`, and commit:
+Installation is most easily done using the setup.py file that can be found in this repository. However, installation does depend on the [Click library](https://github.com/pallets/click) for user configuration options. If you haven't already installed it, then go ahead and install that before proceeding with the following commands:
 
-```sh
-curl -LO http://git.io/Xy0Chg
-git add README.md
-git commit -m "Use README Boilerplate"
+```
+python3 setup.py
 ```
 
 ## Usage
