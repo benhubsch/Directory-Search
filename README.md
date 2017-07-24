@@ -54,8 +54,8 @@ to remind yourself of the available commands if you ever forget.
 
 ## Support
 
-Please note that this is application is currently only funcitonal on OS X. [Open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+Please note that this is application is currently only funcitonal on OS X. [Open an issue](https://github.com/benhubsch/File-Finder/issues/new) for support.
 
 ## Contributing
 
-Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
+I would love any and all help with this project! I still need to make this compatible on other operating systems, and I think it'd be cool to clean up the setup process and make it installable using pip. Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
