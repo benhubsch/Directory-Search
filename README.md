@@ -11,7 +11,7 @@ A command-line program that removes the hassle of finding and opening files and 
 
 ## Installation
 
-Installation is most easily done using the setup.py file that can be found in this repository. However, installation does depend on the [Click library](https://github.com/pallets/click) for user configuration options. If you haven't already installed it, then go ahead and install that before proceeding with the following commands on the command line:
+Installation is most easily done using the setup.py file that can be found in this repository. However, installation does depend on the [Click library](https://github.com/pallets/click) for user configuration options (common file paths, favorite text editor, etc.). If you haven't already installed it, then go ahead and install that before proceeding with the following commands on the command line:
 
 ```
 $ python3 setup.py
@@ -24,6 +24,15 @@ The structure of most all commands will be roughly as follows:
 ```
 $ ff [file or directory name] [-flag]
 ```
+Note that every command works with both files and directories. If you issue a command that feels unnatural, such as changing directories to a file called helloWorld.js, the program will intelligently change to the directory in which helloWorld.js is contained since changing directories to helloWorld.js makes no sense.
+
+There are 4 main flags you can use: --change-directory (aliased as -c), --open-editor (-e), --open-finder (-f), and --duplicated (-d).
+Changing directories is fairly straightforward and can be done as follows:
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+
+
+
+You can add the duplicated flag to any command if you think there's a chance that you might have two files or directories of the same name in your file system. If you only have one, it will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
 
 The file or directory name option should be self evident.
 
@@ -35,7 +44,7 @@ to remind yourself of the available commands if you ever forget.
 
 ## Support
 
-Please [open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
+Please note that this is application is currently only funcitonal on OS X. [Open an issue](https://github.com/fraction/readme-boilerplate/issues/new) for support.
 
 ## Contributing
 
