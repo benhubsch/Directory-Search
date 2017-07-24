@@ -42,6 +42,8 @@ Again, we see the familiar found.java contained within the folder Find Me.
 Lastly, you can add the duplicated flag to any command if you think there's a chance that you might have two files or directories of the same name in your file system. If you only have one, it will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
 
 Here is an example where I have a file called found.java that exists in multiple places. I can use the -d flag in combination with one of the previous flags to deal with that:
+![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/duplicate.png "Duplicates cd")
+
 
 You can also always type
 ```
