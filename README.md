@@ -32,7 +32,7 @@ Changing directories is fairly straightforward and can be done as follows:
 You'll notice that there's a folder on my Desktop called Find Me, which the program is able to find with ease, despite the fact that it's in a different directory from the one I'm currently in. It's also worth noting that my directory name had a space in it but was still found!
 
 Opening a file or directory in your favorite editor has similar syntax, but with a flag -e:
-![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/editor.png "Opening an editor")
+![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/editor.png "Opening an editor" =250x)
 During setup, I specified Atom as my text editor, so the directory opened in Atom automatically. And it contains a file called found.java! Cool!
 
 Next, I can open any file or directory in a new window in the Mac Finder application using the flag -f:
