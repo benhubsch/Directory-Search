@@ -35,7 +35,7 @@ You'll notice that there's a folder on my Desktop called Find Me, which the prog
 
 Opening a file or directory in your favorite editor has similar syntax:
 
-![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
+![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/editor.png "Opening an editor")
 
 
 Lastly, I can open any file or directory in a new window in the Mac Finder application using the flag -f:
