@@ -44,8 +44,6 @@ Lastly, I can open any file or directory in a new window in the Mac Finder appli
 
 You can add the duplicated flag to any command if you think there's a chance that you might have two files or directories of the same name in your file system. If you only have one, it will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
 
-The file or directory name option should be self evident.
-
 You can also always type
 ```
 $ ff --help
