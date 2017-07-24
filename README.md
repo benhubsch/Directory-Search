@@ -1,6 +1,6 @@
-# README Boilerplate
+# File-Finder
 
-A template of README best practices to make your README simple to understand and easy to use. 
+A command-line program that removes the hassle of finding and opening files and directories.
 
 ## Table of Contents
 
