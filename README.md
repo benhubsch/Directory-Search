@@ -39,7 +39,7 @@ Opening a file or directory in your favorite editor has similar syntax, but with
 During setup, I specified Atom as my text editor, so the directory opened in Atom automatically. And it contains a file called helloWorld.java! Cool!
 
 Lastly, I can open any file or directory in a new window in the Mac Finder application using the flag -f:
-
+![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/finder.png "Opening Mac Finder")
 
 
 You can add the duplicated flag to any command if you think there's a chance that you might have two files or directories of the same name in your file system. If you only have one, it will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
