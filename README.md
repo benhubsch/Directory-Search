@@ -29,7 +29,8 @@ Note that every command works with both files and directories. If you issue a co
 There are 4 main flags you can use: --change-directory (aliased as -c), --open-editor (-e), --open-finder (-f), and --duplicated (-d).
 Changing directories is fairly straightforward and can be done as follows:
 
-![alt text](https://github.com/benhubsch/File-Finder/edit/master/pics/c.png)
+![alt text](https://github.com/benhubsch/File-Finder/edit/master/pics/c.png "Logo Title Text 1")
+![alt text](https://github.com/adam-p/markdown-here/raw/master/src/common/images/icon48.png "Logo Title Text 1")
 
 You'll notice that there's a folder on my Desktop called Find Me, which the program is able to find with ease, despite the fact that it's in a different directory from the one I'm currently in.
 
