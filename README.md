@@ -31,7 +31,7 @@ Changing directories is fairly straightforward and can be done as follows:
 
 ![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/c.png "Changing Directories")
 
-You'll notice that there's a folder on my Desktop called Find Me, which the program is able to find with ease, despite the fact that it's in a different directory from the one I'm currently in.
+You'll notice that there's a folder on my Desktop called Find Me, which the program is able to find with ease, despite the fact that it's in a different directory from the one I'm currently in. It's also worth noting that my directory name had a space in it but was still found!
 
 Opening a file or directory in your favorite editor has similar syntax:
 
