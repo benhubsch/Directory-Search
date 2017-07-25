@@ -4,7 +4,7 @@ A command-line program that removes the hassle of finding and opening files and 
 
 ## Table of Contents
 
-- [Project Overview](#project Overview)
+- [Project Overview](#project-overview)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
