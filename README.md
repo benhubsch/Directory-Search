@@ -12,7 +12,15 @@ A command-line program that removes the hassle of finding and opening files and 
 
 ## Project Overview
 
-SOME WORDS
+This was a fun, quirky project that sprung up one day when I got frustrated trying to find files while developing. It seemed to me to be ridiculous that there was no better way to get to files (if you didn't know exactly where they were) than to alternate between typing "cd" and "ls" commands back to back to back. When I searched on Github and on the internet for a package that could search for files and directories automatically, I couldn't find one. Thus, I decided to write one myself! 
+
+I used the [Click library](https://github.com/pallets/click) in Python, the ability to import OS to control a user's operating system activity, and os.path to help with joining the navigated paths together.
+
+I'd never written a command-line application before, so the first thing I did was Google around for some nice resources I could use as a starting point. After poking through a couple of Youtube videos, I found the [Click library](https://github.com/pallets/click) in Python. I ended up reading the entire documentation top to bottom to really familiarize myself with it. That was an interesting excercise but also a really valuable one in reading docs. You learn to kind of fill in the gaps yourself where the docs don't explain something perfectly well. 
+
+One thing that mattered to me was preparing this module for distribution as well because I think too often I mess around on my computer locally and never actually have the experience of shipping code to production or putting it in front of other people. As such, I had to learn about [setuptools](http://setuptools.readthedocs.io/en/latest/) and what the various configurations are surrounding that module.
+
+Lastly, it was a challenge to account for edge cases. Since my goal was always to be able to put it in front of other people, I wanted to account for scenarios in which users didn't provide perfect input. For example, what happens if the users directory name contains a space? What happens if they give a command to change their working directory but provide a filename instead of a directory? What happens if they reference their current directory by the commonly used "." and not its actual name? Those were things that I wanted to iron out, which led to a lengthy debug process once the bulk of the code had been written.
 
 ## Installation
 
@@ -64,4 +72,4 @@ Please note that this is application is currently only funcitonal on OS X. [Open
 
 ## Contributing
 
-I would love any and all help with this project! I still need to make this compatible on other operating systems, and I think it'd be cool to clean up the setup process and make it installable using pip. Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
+I would love any and all help with this project! I still need to make this compatible on other operating systems, and I think it'd be cool to clean up the setup process and make it installable using pip. I also think it would be super ~fresh~ if we incorporated autocomplete into it. Anybody want to write a Trie class that we can persist on a per-user basis? Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
