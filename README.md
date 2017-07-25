@@ -1,6 +1,6 @@
 # File-Finder
 
-A command-line program that removes the hassle of finding and opening files and directories.
+A command-line program that automates finding and opening files and directories and removes the hassle of searching for them manually.
 
 ## Table of Contents
 
