@@ -16,7 +16,7 @@ This was a fun, quirky project that sprung up one day when I got frustrated tryi
 
 I used the [Click library](https://github.com/pallets/click) in Python, the ability to import OS to control a user's operating system activity, and os.path to help with joining the navigated paths together.
 
-I'd never written a command-line application before, so the first thing I did was Google around for some nice resources I could use as a starting point. After poking through a couple of Youtube videos, I found the [Click library](https://github.com/pallets/click) in Python. I ended up reading the entire documentation top to bottom to really familiarize myself with it. That was an interesting excercise but also a really valuable one in reading docs. You learn to kind of fill in the gaps yourself where the docs don't explain something perfectly well. 
+I'd never written a command-line application before, so the first thing I did was Google around for some nice resources I could use as a starting point. I ended up reading Click's entire documentation top to bottom to really familiarize myself with it. That was an interesting excercise but also a really valuable one in reading docs. You learn to kind of fill in the gaps yourself where the docs don't explain something perfectly well. 
 
 One thing that mattered to me was preparing this module for distribution as well because I think too often I mess around on my computer locally and never actually have the experience of shipping code to production or putting it in front of other people. As such, I had to learn about [setuptools](http://setuptools.readthedocs.io/en/latest/) and what the various configurations are surrounding that module.
 
