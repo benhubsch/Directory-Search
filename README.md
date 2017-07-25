@@ -52,9 +52,9 @@ Next, I can open any file or directory in a new window in the Mac Finder applica
 ![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/finder.png "Opening Mac Finder")
 Again, we see the familiar found.java contained within the folder Find Me.
 
-Lastly, you can add the duplicated flag to any command if you think there's a chance that you might have two files or directories of the same name in your file system. If you only have one, it will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
+Lastly, you can add the duplicated flag to any command if you think there's a chance that you might have two or more files or directories of the same name in your file system. If you only have one, the program will assume that it's the one you want and will perform the relevant action like it would without the duplicated flag. If you have multiple, you will be given the opportunity to specify the file that you would like the action to be performed on.
 
-Here is an example where I have a file called found.java that exists in multiple places, but I want to change my current working directory to one of them. I can use the -d flag in combination with the -c flag to deal with that:
+Here is an example where I have a file called found.java that exists in multiple places, but I want to change my current working directory to one of them. I can use the -d flag in combination with the -c flag to achieve my desired result:
 ![alt text](https://github.com/benhubsch/File-Finder/blob/master/pics/duplicate.png "Duplicates cd")
 The program now finds every instance of found.java, records their absolute file paths, and ulimately gives me the option to pick one of them. I enter the number 1, so my directory is changed to "Sophomore Duke", which corresponds to my choice.
 
