@@ -4,10 +4,15 @@ A command-line program that removes the hassle of finding and opening files and 
 
 ## Table of Contents
 
+- [Project Overview](#project Overview)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Support](#support)
 - [Contributing](#contributing)
+
+## Project Overview
+
+SOME WORDS
 
 ## Installation
 
