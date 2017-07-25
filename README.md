@@ -12,19 +12,19 @@ A command-line program that automates finding and opening files and directories 
 
 ## Project Overview
 
-This was a fun, quirky project that sprung up one day when I got frustrated trying to find files while developing. It seemed to me to be ridiculous that there was no better way to get to files (if you didn't know exactly where they were) than to alternate between typing "cd" and "ls" commands back to back to back. When I searched on Github and on the internet for a package that could search for files and directories automatically, I couldn't find one. Thus, I decided to write one myself! 
+This was a fun, quirky project that sprung up one day when I got frustrated trying to find files while developing. To me it seemed ridiculous that there was no better way to get to files (if you didn't know exactly where they were) than to alternate between typing "cd" and "ls" commands over and over and over. When I searched on Github and the internet for a package that could search for files and directories automatically, I couldn't find one. Thus, I decided to write one myself! 
 
 I used the [Click library](https://github.com/pallets/click) in Python, the ability to import OS to control a user's operating system activity, and os.path to help with joining the navigated paths together.
 
 I'd never written a command-line application before, so the first thing I did was Google around for some nice resources I could use as a starting point. I ended up reading Click's entire documentation top to bottom to really familiarize myself with it. That was an interesting excercise but also a really valuable one in reading docs. You learn to kind of fill in the gaps yourself where the docs don't explain something perfectly well. 
 
-One thing that mattered to me was preparing this module for distribution as well because I think too often I mess around on my computer locally and never actually have the experience of shipping code to production or putting it in front of other people. As such, I had to learn about [setuptools](http://setuptools.readthedocs.io/en/latest/) and what the various configurations are surrounding that module. I had to make choices about how I was going to deal with faulty user input during setup (I ended up using a while loop that re-prompts until satisfied), which also meant that my installation flow was more complicated than it would have been otherwise.
+One thing that mattered to me was preparing this module for distribution because I think too often I mess around on my computer locally and never actually have the experience of shipping code to production or putting it in front of other people. As such, I dug into [setuptools](http://setuptools.readthedocs.io/en/latest/) and learned about the various configurations  surrounding that module. I had to make choices about how I was going to deal with faulty user input during setup (I ended up using a while loop that re-prompts until satisfied), which also meant that my installation flow was more complicated than it would have been otherwise.
 
 Lastly, it was a challenge to account for edge cases. Since my goal was always to be able to put it in front of other people, I wanted to account for scenarios in which users didn't provide perfect input. For example, what happens if the users directory name contains a space? What happens if they give a command to change their working directory but provide a filename instead of a directory? What happens if they reference their current directory by the commonly used "." and not its actual name? Those were things that I wanted to iron out, which led to a lengthy debug process once the bulk of the code had been written.
 
 ## Installation
 
-Installation is most easily done using the setup.py file that can be found in this repository. However, installation does depend on the [Click library](https://github.com/pallets/click) for user configuration options (common file paths, favorite text editor, etc.). If you haven't already installed it, then go ahead and install that before proceeding with the following commands on the command line:
+Installation is most easily done using the setup.py file that can be found in this repository. However, installation does depend on the [Click library](https://github.com/pallets/click) for user configuration options (prompts for common file paths, favorite text editor, etc.). If you don't already have it installed, go ahead and install that before proceeding with the following command on the command line:
 
 ```
 $ python3 setup.py
@@ -32,12 +32,12 @@ $ python3 setup.py
 
 ## Usage
 
-The structure of most all commands will be roughly as follows:
+The structure of all commands will be as follows:
 
 ```
 $ ff [file or directory name] [-flag]
 ```
-Note that every command works with both files and directories. If you issue a command that feels unnatural, such as changing directories to a file called helloWorld.js, the program will intelligently change to the directory in which helloWorld.js is contained since changing directories to helloWorld.js makes no sense.
+Note that every command works with both files and directories. If you issue a command that feels unnatural, such as changing directories to a file called helloWorld.js, the program will intelligently change to the directory in which helloWorld.js is located, since changing directories to helloWorld.js makes no sense.
 
 There are 4 main flags you can use: --change-directory (aliased as -c), --open-editor (-e), --open-finder (-f), and --duplicated (-d).
 Changing directories is fairly straightforward and can be done as follows:
