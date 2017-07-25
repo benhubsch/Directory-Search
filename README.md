@@ -72,4 +72,4 @@ Please note that this is application is currently only funcitonal on OS X. [Open
 
 ## Contributing
 
-I would love any and all help with this project! I still need to make this compatible on operating systems besides OS X, and I think it'd be cool to clean up the setup process and make it installable using pip. I also think it would be super \~fresh\~ if we incorporated autocomplete into it. Anybody want to write a Trie class that we can persist on a per-user basis? Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
+I would love any and all help with this project! I still need to make this compatible on operating systems besides OS X, and I think it'd be cool to clean up the setup process and make it pip installable. I also think it would be super \~fresh\~ if we incorporated autocomplete into it. Anybody want to make use of a Trie class that we can persist on a per-user basis? Create a branch, add commits, and [open a pull request](https://github.com/benhubsch/File-Finder/compare/).
