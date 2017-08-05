@@ -1,4 +1,4 @@
-# File-Finder
+# Insta-Nav
 
 A command-line program that automates finding and opening files and directories and removes the hassle of searching for them manually.
 
